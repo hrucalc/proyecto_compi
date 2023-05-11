@@ -5,33 +5,37 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Incluir hoja de estilos de Bootstrap -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <!-- Incluir hoja de estilos personalizada -->
     <link rel="stylesheet" href="styles.css">
     <title>Proyecto final</title>
 </head>
 
 <body>
+    <!-- Contenedor principal de la página -->
     <div class="row row_correction d-flex flex-column min-vh-100 justify-content-center align-items-center">
 
         <div class="col-10 col-md-10 col-lg-10">
+            <!-- Alerta para mostrar mensajes al usuario -->
             <div id="alert" class="custom_alert p-1 mt-1 text-center" role="alert">
                 Ingresa un comando
             </div>
         </div>
 
         <div class="col-10 col-md-6 col-lg-3">
-
-
-
+            <!-- Entrada de texto para ingresar comandos -->
             <input class="form-control" type="text" name="command_input" id="command_input">
 
+            <!-- Botón para ejecutar el comando ingresado -->
             <button class="btn custom_button w-100 mt-2" onclick="readCommand()">Ingresar</button>
         </div>
 
         <div class="col-10 col-md-10 col-lg-10 mt-5">
             <h3 class="text-center text-light">Pila</h3>
 
+            <!-- Contenedor para mostrar los elementos de la pila -->
             <div id="stack_container"
                 class="row row_correction stack_container justify-content-center align-items-center">
             </div>
@@ -39,21 +43,16 @@
 
         <div class="col-10 col-md-6 col-lg-3 mt-4">
             <h3 class="text-center text-light">Salida</h3>
+            <!-- Elemento para mostrar la salida de la calculadora -->
             <div id="output" class="output row align-items-center justify-content-center row_correction">
             </div>
         </div>
-
-
-
-
-
-
-
-
     </div>
 
 </body>
+<!-- Incluir el archivo de script principal -->
 <script src="index.js"></script>
+<!-- Incluir el archivo de script de Bootstrap -->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
     integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
     crossorigin="anonymous"></script>

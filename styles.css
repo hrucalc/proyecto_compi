@@ -1,26 +1,31 @@
 body {
     background-color: rgb(20, 20, 20) !important;
+    /* Establece el color de fondo del cuerpo del documento */
 }
 
 .row_correction {
     margin: 0 !important;
     padding: 0 !important;
+    /* Corrige los márgenes y el relleno de las filas en Bootstrap */
 }
 
 input{
     background-color: rgb(20, 20, 20) !important;
     color: white !important;
     font-size: 30px !important;
+    /* Establece el color de fondo, color de texto y tamaño de fuente de los elementos de entrada */
 }
 
 .custom_alert{
     color: white !important;
     font-size: 25px !important;
+    /* Establece el color de texto y tamaño de fuente de las alertas personalizadas */
 }
 
 .custom_button{
     background-color: rgb(0, 255, 149) !important;
     font-weight: 600;
+    /* Establece el color de fondo y el peso de fuente del botón personalizado */
 }
 
 .output{
@@ -30,6 +35,7 @@ input{
     height: 100px;
     font-size: 50px !important;
     color: white;
+    /* Establece el estilo de la salida: color de fondo, borde, altura, tamaño de fuente y color de texto */
 }
 
 .stack_item{
@@ -39,8 +45,10 @@ input{
     float: left;
     width: min-content;
     margin: 1px;
+    /* Establece el estilo de los elementos individuales de la pila: color de texto, borde, borde redondeado, flotamiento, ancho y margen */
 }
 
 .stack_container{
     margin-bottom: 1em !important;
+    /* Establece el margen inferior del contenedor de la pila */
 }

@@ -14,8 +14,8 @@ function readCommand() {
     if (commandInput.value != "") {
         // Verificar si se espera un comando o un número en la entrada
         if (needCommand) {
-            // Expresión regular para validar los comandos permitidos (PUSH, NEG, ADD, MUL, DIV, OUTPUT, END)
-            regex = new RegExp('\\b(PUSH|NEG|ADD|MUL|DIV|OUTPUT|END)\\b', 'g');
+            // Expresión regular para validar los comandos permitidos (PUSH, NEG, ADD, SUB, MUL, DIV, OUTPUT, END)
+            regex = new RegExp('\\b(PUSH|NEG|ADD|SUB|MUL|DIV|OUTPUT|END)\\b', 'g');
 
             // Verificar si el comando ingresado coincide con el patrón permitido
             if (regex.test(commandInput.value)) {
@@ -24,7 +24,8 @@ function readCommand() {
                         // Si el comando es "PUSH", cambiar el estado para esperar un número y limpiar la entrada
                         needCommand = false;
                         commandInput.value = "";
-                        alertContainer.innerHTML = "Ingresa un valor numérico";
+                        showAlert(1)
+                        commandInput.focus();
                         break;
 
                     case "NEG":
@@ -34,7 +35,7 @@ function readCommand() {
                             commandInput.value = "";
                             refreshStack();
                         } else {
-                            alertContainer.innerHTML = "No hay ningún elemento en la pila";
+                            showAlert(2)
                         }
 
                         break;
@@ -48,9 +49,22 @@ function readCommand() {
                             commandInput.value = "";
                             refreshStack();
                         } else {
-                            alertContainer.innerHTML = "Deben haber al menos 2 elementos en la pila";
+                            showAlert(3)
                         }
                         break;
+
+                    case "SUB":
+                            // Si el comando es "SUB", restar los dos últimos elementos de la pila y reemplazarlos con el resultado
+                            if (stack.length > 1) {
+                                let sub = stack[stack.length - 2] * 1 - stack[stack.length - 1] * 1;
+                                stack.splice(stack.length - 2, 2);
+                                stack.push(sub);
+                                commandInput.value = "";
+                                refreshStack();
+                            } else {
+                                showAlert(4)
+                            }
+                            break;
 
                     case "MUL":
                         // Si el comando es "MUL", multiplicar los dos últimos elementos de la pila y reemplazarlos con el resultado
@@ -61,7 +75,7 @@ function readCommand() {
                             commandInput.value = "";
                             refreshStack();
                         } else {
-                            alertContainer.innerHTML = "Deben haber al menos 2 elementos en la pila";
+                            showAlert(3)
                         }
                         break;
 
@@ -75,10 +89,13 @@ function readCommand() {
                                 commandInput.value = "";
                                 refreshStack();
                             } else {
-                                alertContainer.innerHTML = "No se puede operar, el resultado es un número real, solo se admiten enteros";
+                                stack.splice(stack.length - 1, 1);
+                                commandInput.value = "";
+                                refreshStack();
+                                showAlert(4)
                             }
                         } else {
-                            alertContainer.innerHTML = "Deben haber al menos 2 elementos en la pila";
+                            showAlert(3)
                         }
 
                         break;
@@ -89,7 +106,7 @@ function readCommand() {
                             commandInput.value = "";
                             output.innerHTML = stack[stack.length - 1];
                         } else {
-                            alertContainer.innerHTML = "No hay elementos en la pila";
+                            showAlert(5)
                         }
                         break;
 
@@ -105,19 +122,19 @@ function readCommand() {
                         break;
                 }
             } else {
-                alertContainer.innerHTML = "Comando inválido";
+                showAlert(6)
             }
         } else {
             // Se espera un número en la entrada
-            regex = new RegExp('^\\d+$', 'g');
+            regex = new RegExp('^-?\\d+$', 'g');
             if (regex.test(commandInput.value)) {
                 // Si se ingresó un número válido, agregarlo a la pila y cambiar al estado de esperar un comando
                 stack.push(commandInput.value);
                 needCommand = true;
                 commandInput.value = "";
-                alertContainer.innerHTML = "Ingresa un comando";
+                showAlert(9)
             } else {
-                alertContainer.innerHTML = "Debes ingresar un número";
+                showAlert(8)
             }
 
             refreshStack();
@@ -125,9 +142,9 @@ function readCommand() {
     } else {
         // No se ingresó ningún comando
         if (needCommand = true) {
-            alertContainer.innerHTML = "Debes ingresar un comando";
+            showAlert(7)
         } else {
-            alertContainer.innerHTML = "Debes ingresar un número";
+            showAlert(8)
         }
     }
 }
@@ -138,4 +155,54 @@ function refreshStack() {
     for (let i = 0; i < stack.length; i++) {
         stackContainer.innerHTML += '<div class="stack_item">' + stack[i] + '</div>';
     }
+    commandInput.focus();
 }
+
+// Función para leer si en el campo de comandos se presiona enter para intentar ejecutar el comando
+function handleKeyPress(event) {
+    if (event.keyCode === 13) {
+      // Código a ejecutar cuando se presiona Enter
+      readCommand();
+    }
+  }
+
+// Función para poder desplegar las alertas dependiendo del código de alerta proporcionado
+function showAlert(alertCode) {
+    let message;
+    
+    switch (alertCode) {
+      case 1:
+        message = "Ingresa un valor numérico";
+        break;
+      case 2:
+        message = "No hay ningún elemento en la pila";
+        break;
+      case 3:
+        message = "Deben haber al menos 2 elementos en la pila";
+        break;
+      case 4:
+        message = "No se puede operar, el resultado es un número real, solo se admiten enteros";
+        break;
+      case 5:
+        message = "No hay elementos en la pila";
+        break;
+      case 6:
+        message = "Comando inválido";
+        break;
+      case 7:
+        message = "Debes ingresar un comando";
+        break;
+      case 8:
+        message = "Debes ingresar un número";
+        break;
+      case 9:
+        message = "Ingresa un comando";
+        break;
+      default:
+        message = "Error desconocido";
+        break;
+    }
+    
+    alertContainer.innerHTML = message;
+  }
+  

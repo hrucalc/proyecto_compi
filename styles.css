@@ -1,0 +1,46 @@
+body {
+    background-color: rgb(20, 20, 20) !important;
+}
+
+.row_correction {
+    margin: 0 !important;
+    padding: 0 !important;
+}
+
+input{
+    background-color: rgb(20, 20, 20) !important;
+    color: white !important;
+    font-size: 30px !important;
+}
+
+.custom_alert{
+    color: white !important;
+    font-size: 25px !important;
+}
+
+.custom_button{
+    background-color: rgb(0, 255, 149) !important;
+    font-weight: 600;
+}
+
+.output{
+    background-color: rgb(30, 30, 30);
+    border: 3px solid rgb(100, 100, 100);
+    border-radius: 5px;
+    height: 100px;
+    font-size: 50px !important;
+    color: white;
+}
+
+.stack_item{
+    color: white;
+    border: 2px solid white;
+    border-radius: 5px;
+    float: left;
+    width: min-content;
+    margin: 1px;
+}
+
+.stack_container{
+    margin-bottom: 1em !important;
+}

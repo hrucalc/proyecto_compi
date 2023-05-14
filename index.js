@@ -143,12 +143,11 @@ function readCommand() {
                 stack.push(commandInput.value);
                 needCommand = true;
                 commandInput.value = "";
-                showAlert(9)
+                refreshStack();
             } else {
                 showAlert(8)
             }
 
-            refreshStack();
         }
     } else {
         // No se ingresó ningún comando
@@ -167,6 +166,7 @@ function refreshStack() {
         stackContainer.innerHTML += '<div class="stack_item">' + stack[i] + '</div>';
     }
     commandInput.focus();
+    showAlert(9)
 }
 
 // Función para leer si en el campo de comandos se presiona enter para intentar ejecutar el comando

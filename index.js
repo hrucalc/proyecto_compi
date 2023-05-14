@@ -119,6 +119,17 @@ function readCommand() {
                         break;
 
                     default:
+                        // Expresión regular para validar si se ingresa el comando PUSH seguido del número a ingresar
+                        regex = new RegExp('^PUSH\\s*-?\\d+$');
+                        // Si el comando de ingreso es correcto agregar el valor a la pila
+                        if (regex.test(commandInput.value)) {                         
+                            stack.push(commandInput.value.replace(/PUSH\s*/g, ""));
+                            needCommand = true;
+                            commandInput.value = "";
+                            showAlert(9);
+                            refreshStack();
+                        }
+
                         break;
                 }
             } else {
